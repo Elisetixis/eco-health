@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Medicamento</title>
+</head>
+<body>
+
+<h1>Editar Medicamento</h1>
+
+<form method="POST">
+
+    <label>Nome</label>
+    <input
+        type="text"
+        name="nome"
+        value="{{ medicamento[2] }}"
+        required
+    >
+
+    <br><br>
+
+    <label>Dosagem</label>
+    <input
+        type="text"
+        name="dosagem"
+        value="{{ medicamento[3] }}"
+        required
+    >
+
+    <br><br>
+
+    <label>Horário</label>
+    <input
+        type="time"
+        name="horario"
+        value="{{ medicamento[4] }}"
+        required
+    >
+
+    <br><br>
+
+    <label>Observações</label>
+    <textarea name="observacoes">{{ medicamento[5] }}</textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Salvar Alterações
+    </button>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eco Health - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Eco Health</h1>
+            <p>Cuidado, organização e segurança para idosos.</p>
+
+            <form method="POST" action="/">
+
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Digite seu email">
+
+                <label>Senha</label>
+                <input type="password" name="senha" placeholder="Digite sua senha">
+
+                <button type="submit">Entrar</button>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

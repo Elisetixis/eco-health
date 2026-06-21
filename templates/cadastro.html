@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro -Eco Health</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Eco Health</h1>
+      <p>Crie sua conta para gerenciar os cuidados com idosos.</p>
+
+      <form method="POST" action="/cadastro">
+        <label>Nome completo</label>
+        <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Digite seu email" required>
+
+        <label>Telefone</label>
+        <input type="text" name="telefone" placeholder="Digite seu telefone" required>
+
+        <label>Tipo de usuário</label>
+        <select name="tipo_usuario" required>
+          <option value="">Selecione</option>
+          <option value="cuidador">Cuidador</option>
+          <option value="instituicao">Instituição</option>
+        </select>
+
+        <label>Senha</label>
+        <input type="password" name="senha" placeholder="Digite sua senha" required>
+
+        <label>Confirmar senha</label>
+        <input type="password" name="confirmar_senha" placeholder="Confirme sua senha" required>
+
+        <button type="submit">Cadastrar</button>
+      </form>
+
+      <p class="link-text">
+        Já tem conta? <a href="/">Entrar</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

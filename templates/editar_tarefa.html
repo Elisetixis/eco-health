@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Tarefa</title>
+</head>
+<body>
+
+<h1>Editar Tarefa</h1>
+
+<form method="POST">
+
+   <label>Descrição</label>
+<input
+    type="text"
+    name="descricao"
+    value="{{ tarefa[1] }}"
+    required
+>
+
+    <br><br>
+
+  <label>Data</label>
+<input
+    type="date"
+    name="data"
+    value="{{ tarefa[2] }}"
+    required
+>
+
+    <br><br>
+
+   <label>Hora</label>
+<input
+    type="time"
+    name="hora"
+    value="{{ tarefa[3] }}"
+    required
+>
+
+    <br><br>
+
+   <select name="status">
+
+    <option value="Pendente"
+    {% if tarefa[4] == "Pendente" %}
+    selected
+    {% endif %}
+    >
+        Pendente
+    </option>
+
+    <option value="Concluída"
+    {% if tarefa[4] == "Concluída" %}
+    selected
+    {% endif %}
+    >
+        Concluída
+    </option>
+
+</select>
+    <br><br>
+
+   <textarea name="observacao">{{ tarefa[5] }}</textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Salvar Alterações
+    </button>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Idoso</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Cadastrar Idoso</h1>
+      <p>Preencha os dados do idoso acompanhado.</p>
+
+      <form method="POST" action="/cadastrar_idoso">
+        <label>Nome</label>
+        <input type="text" name="nome" placeholder="Nome completo" required>
+
+        <label>Idade</label>
+        <input type="number" name="idade" placeholder="Idade" required>
+
+        <label>Sexo</label>
+        <select name="sexo" required>
+          <option value="">Selecione</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Outro">Outro</option>
+        </select>
+
+        <label>Telefone do responsável</label>
+        <input type="text" name="telefone_responsavel" placeholder="Telefone do responsável" required>
+
+        <label>Observações</label>
+        <textarea name="observacoes" placeholder="Ex: diabético, usa cadeira de rodas, alergias..."></textarea>
+
+        <button type="submit">Cadastrar Idoso</button>
+      </form>
+
+      <p class="link-text">
+        <a href="/dashboard">Voltar ao Dashboard</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

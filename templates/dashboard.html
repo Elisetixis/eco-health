@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Eco Health</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="header">
+    <h1> Eco Health</h1>
+    <p>Sistema de Gestão para Cuidados de Idosos</p>
+</div>
+
+<div class="container">
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>👴 Idosos</h3>
+            <p>{{ total_idosos }}</p>
+        </div>
+
+        <div class="card">
+            <h3>💊 Medicamentos</h3>
+            <p>{{ total_medicamentos }}</p>
+        </div>
+
+        <div class="card">
+            <h3>📋 Tarefas</h3>
+            <p>{{ total_tarefas }}</p>
+        </div>
+
+    </div>
+
+    
+<div class="section">
+    <div>
+<h2>👴 Idosos Cadastrados</h2>
+
+<table border="1">
+    <tr>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for idoso in idosos %}
+    <tr>
+        <td>{{ idoso[1] }}</td>
+        <td>{{ idoso[2] }}</td>
+        <td>
+            <a href="/editar_idoso/{{ idoso[0] }}">Editar</a>
+            |
+            <a href="/excluir_idoso/{{ idoso[0] }}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+    </div>
+</div>
+
+  
+<div class="section">
+    <div>
+        <h2>💊 Medicamentos Cadastrados</h2>
+
+<table border="1">
+    <tr>
+        
+    <th>Idoso</th>
+    <th>Medicamento</th>
+    <th>Dosagem</th>
+    <th>Horário</th>
+    <th>Observações</th>
+    <th>Ações</th>
+
+    </tr>
+
+    {% for medicamento in medicamentos %}
+  
+       <tr>
+    <td>{{ medicamento[1] }}</td>
+    <td>{{ medicamento[2] }}</td>
+    <td>{{ medicamento[3] }}</td>
+    <td>{{ medicamento[4] }}</td>
+    <td>{{ medicamento[5] }}</td>
+
+    <td>
+        <a href="/editar_medicamento/{{ medicamento[0] }}">
+            Editar
+        </a>
+
+        |
+
+        <a href="/excluir_medicamento/{{ medicamento[0] }}">
+            Excluir
+        </a>
+    </td>
+</tr>
+    {% endfor %}
+</table>
+
+<h2>Alertas de Medicamentos</h2>
+
+<div id="alerta-medicamento"></div>
+
+<script>
+const medicamentos = JSON.parse('{{ medicamentos | tojson | safe }}');
+
+function verificarMedicamentos() {
+    const horaAtual = new Date();
+    const horas = String(horaAtual.getHours()).padStart(2, '0');
+    const minutos = String(horaAtual.getMinutes()).padStart(2, '0');
+
+    const horarioAtual = horas + ":" + minutos;
+
+    for (let med of medicamentos) {
+        const idoso = med[1];
+        const nome = med[2];
+        const dosagem = med[3];
+        const horario = med[4];
+
+        if (horario === horarioAtual) {
+            document.getElementById("alerta-medicamento").innerHTML = `
+                <div style="
+                    background:#ffeb3b;
+                    padding:15px;
+                    margin-bottom:15px;
+                    border-radius:10px;
+                    font-weight:bold;
+                ">
+                    ⚠️ Hora do medicamento!
+                    <br>
+                    Idoso: ${idoso}
+                    <br>
+                    Medicamento: ${nome}
+                    <br>
+                    Dosagem: ${dosagem}
+                </div>
+            `;
+
+            alert(
+                "⚠️ Hora do medicamento!\n" +
+                "Idoso: " + idoso + "\n" +
+                "Medicamento: " + nome + "\n" +
+                "Dosagem: " + dosagem
+            );
+        }
+    }
+}
+
+verificarMedicamentos();
+
+setInterval(verificarMedicamentos, 60000);
+</script>
+
+
+    </div>
+</div>
+
+    
+
+<div class="section">
+    <div>
+        <h2>📋 Tarefas Cadastradas</h2>
+        
+<table border="1">
+    <tr>
+        <th>Idoso</th>
+        <th>Tarefa</th>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for tarefa in tarefas %}
+   <tr>
+    <td>{{ tarefa[1] }}</td>
+    <td>{{ tarefa[2] }}</td>
+    <td>{{ tarefa[3] }}</td>
+    <td>{{ tarefa[4] }}</td>
+
+    <td>
+        {% if tarefa[5] == "Concluída" %}
+            <span style="color: green; font-weight: bold;">
+                {{ tarefa[5] }}
+            </span>
+        {% else %}
+            <span style="color: red; font-weight: bold;">
+                {{ tarefa[5] }}
+            </span>
+        {% endif %}
+    </td>
+
+ <td>
+
+<a href="/editar_tarefa/{{ tarefa[0] }}">
+    Editar
+</a>
+
+|
+
+{% if tarefa[5] == "Pendente" %}
+    <a href="/concluir_tarefa/{{ tarefa[0] }}">
+        Concluir
+    </a>
+{% else %}
+    <a href="/reabrir_tarefa/{{ tarefa[0] }}">
+        Reabrir
+    </a>
+{% endif %}
+
+|
+
+<a href="/excluir_tarefa/{{ tarefa[0] }}">
+    Excluir
+</a>
+
+</td>
+    {% endfor %}
+</table>
+
+    </div>
+
+    <div class="container">
+    <div class="acoes-dashboard">
+
+    <a class="btn-dashboard" href="/cadastrar_idoso">
+        👴 Novo Idoso
+    </a>
+
+    <a class="btn-dashboard" href="/cadastrar_medicamento">
+        💊 Novo Medicamento
+    </a>
+
+    <a class="btn-dashboard" href="/cadastrar_tarefa">
+        📋 Nova Tarefa
+    </a>
+
+</div>
+
+</div>
+
+</body>
+</html>

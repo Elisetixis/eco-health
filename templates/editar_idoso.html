@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Idoso</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Editar Idoso</h1>
+
+      <form method="POST">
+        <label>Nome</label>
+        <input type="text" name="nome" value="{{ idoso[1] }}" required>
+
+        <label>Idade</label>
+        <input type="number" name="idade" value="{{ idoso[2] }}" required>
+
+        <label>Sexo</label>
+        <input type="text" name="sexo" value="{{ idoso[3] }}" required>
+
+        <label>Telefone do responsável</label>
+        <input type="text" name="telefone_responsavel" value="{{ idoso[4] }}" required>
+
+        <label>Observações</label>
+        <textarea name="observacoes">{{ idoso[5] }}</textarea>
+
+        <button type="submit">Salvar Alterações</button>
+      </form>
+
+      <p class="link-text">
+        <a href="/dashboard">Voltar</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

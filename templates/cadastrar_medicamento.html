@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Medicamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+
+        <h1>Cadastrar Medicamento</h1>
+
+        <form method="POST">
+
+            <label>Idoso</label>
+            <select name="idoso_id" required>
+                {% for idoso in idosos %}
+                    <option value="{{ idoso[0] }}">
+                        {{ idoso[1] }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label>Nome do Medicamento</label>
+            <input type="text" name="nome_medicamento" required>
+
+            <label>Dosagem</label>
+            <input type="text" name="dosagem" required>
+
+            <label>Horário</label>
+            <input type="time" name="horario" required>
+
+            <label>Observações</label>
+            <textarea name="observacoes"></textarea>
+
+            <button type="submit">
+                Cadastrar Medicamento
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/dashboard">Voltar</a>
+
+    </div>
+</div>
+
+</body>
+</html>

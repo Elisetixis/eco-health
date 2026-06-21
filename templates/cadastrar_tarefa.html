@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Tarefa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+
+        <h1>Cadastrar Tarefa</h1>
+
+        <form method="POST">
+
+            <label>Idoso</label>
+            <select name="idoso_id" required>
+                {% for idoso in idosos %}
+                    <option value="{{ idoso[0] }}">
+                        {{ idoso[1] }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label>Descrição da tarefa</label>
+            <input type="text" name="descricao" placeholder="Ex: Dar banho, alimentação..." required>
+
+            <label>Data</label>
+            <input type="date" name="data" required>
+
+            <label>Hora</label>
+            <input type="time" name="hora" required>
+
+            <label>Status</label>
+            <select name="status" required>
+                <option value="Pendente">Pendente</option>
+                <option value="Concluída">Concluída</option>
+            </select>
+
+            <label>Observação</label>
+            <textarea name="observacao" placeholder="Detalhes da tarefa"></textarea>
+
+            <button type="submit">Cadastrar Tarefa</button>
+
+        </form>
+
+        <br>
+        <a href="/dashboard">Voltar</a>
+
+    </div>
+</div>
+
+</body>
+</html>
